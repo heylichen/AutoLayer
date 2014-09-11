@@ -21,22 +21,25 @@ import org.eclipse.jface.text.Document;
 public class SampleHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		// Get the root of the workspace
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot root = workspace.getRoot();
-		// Get all projects in the workspace
-		IProject[] projects = root.getProjects();
-		// Loop over all projects
-		for (IProject project : projects) {
-			try {
-				printProjectInfo(project);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
+		CreateSourceHandler createSourceHandler =new CreateSourceHandler();
+		createSourceHandler.execute(event);
 		return null;
 	}
-
+	private void simpleTest(){
+		// Get the root of the workspace
+				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+				IWorkspaceRoot root = workspace.getRoot();
+				// Get all projects in the workspace
+				IProject[] projects = root.getProjects();
+				// Loop over all projects
+				for (IProject project : projects) {
+					try {
+						printProjectInfo(project);
+					} catch (CoreException e) {
+						e.printStackTrace();
+					}
+				}
+	}
 	private void printProjectInfo(IProject project) throws CoreException,
 			JavaModelException {
 		System.out.println("Working in project " + project.getName());
